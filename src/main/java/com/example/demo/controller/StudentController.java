@@ -38,6 +38,18 @@ public class StudentController {
 
     @PostMapping("/add")
     public ResponseEntity<Student> addStudent(@RequestBody @Valid Student student){
+
+
+        LOGGER.info("INFO 2");
+
+        LOGGER.error("ERROR");
+
+        LOGGER.trace("TRACE");
+
+        LOGGER.debug("DEBUG");
+
+
+
         if(student.getName().startsWith("P")) throw new StudentValidationException("Intentionally thrown error");
         if(student.getName().startsWith("A")) throw new NullPointerException("Intentionally thrown error");
         return ResponseEntity.ok(studentService.addStudent(student));

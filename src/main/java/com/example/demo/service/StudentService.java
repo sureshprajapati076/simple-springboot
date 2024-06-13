@@ -2,10 +2,14 @@ package com.example.demo.service;
 
 import com.example.demo.model.Student;
 import com.example.demo.repository.StudentRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
 public class StudentService {
+
+    private final static Logger log = LoggerFactory.getLogger(StudentService.class);
 
     private final StudentRepository studentRepository;
 
@@ -14,6 +18,10 @@ public class StudentService {
     }
 
     public Student addStudent(Student student){
+        log.info("ADDING INFO FOR STUDENT SRV");
+        log.error("ADDING ERROR FOR STUDENT SRV");
+        log.trace("ADDING TRACE FOR STUDENT SRV");
+        log.debug("ADDING DEBUG FOR STUDENT SRV");
         return studentRepository.save(student);
     }
 
