@@ -1,0 +1,69 @@
+### Resilience4j Configuration ###
+resilience4j:
+  timelimiter:
+    configs:
+      default:
+        timeoutDuration: 60s
+        cancelRunningFuture: true
+    instances:
+      orderservice:
+        timeoutDuration: 25s
+      paymentservice:
+        timeoutDuration: 25s
+      productservice:
+        timeoutDuration: 25s
+  thread-pool-bulkhead:
+    configs:
+      default:
+        maxThreadPoolSize: 150
+        coreThreadPoolSize: 50
+        queueCapacity: 10
+    instances:
+      orderservice:
+        maxThreadPoolSize: 150
+        coreThreadPoolSize: 50
+        queueCapacity: 10
+      paymentservice:
+        maxThreadPoolSize: 150
+        coreThreadPoolSize: 50
+        queueCapacity: 10
+      productservice:
+        maxThreadPoolSize: 150
+        coreThreadPoolSize: 50
+        queueCapacity: 10
+  circuitbreaker:
+    configs:
+      default:
+        waitDurationInOpenState: 500
+        minimumNumberOfCalls: 100
+        failureRateThreshold: 90
+    instances:
+      orderservice:
+        waitDurationInOpenState: 500
+        minimumNumberOfCalls: 100
+        failureRateThreshold: 90
+      paymentservice:
+        waitDurationInOpenState: 500
+        minimumNumberOfCalls: 100
+        failureRateThreshold: 90
+      productservice:
+        waitDurationInOpenState: 500
+        minimumNumberOfCalls: 100
+        failureRateThreshold: 90
+  retry:
+    instances:
+      orderservice:
+        maxAttempts: 5
+        waitDuration: 2s
+        resultPredicate: com.rest.client.modules.orders.retry.OrderPredicate
+        retryExceptions:
+          - java.lang.RuntimeException
+          - org.springframework.web.client.HttpServerErrorException
+          - org.springframework.web.client.HttpClientErrorException
+      productservice:
+        maxAttempts: 5
+        waitDuration: 2s
+        retryExceptions:
+          - java.lang.RuntimeException
+          - org.springframework.web.client.HttpServerErrorException
+          - org.springframework.web.client.HttpClientErrorException

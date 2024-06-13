@@ -32,4 +32,21 @@ public class StudentService {
     public void deleteById(Long id) {
         studentRepository.deleteById(id);
     }
+
+
+    /*
+
+    public PaymentDto makeFirstPayment(HttpHeaders headers) {
+        CircuitBreaker circuitBreaker = circuitBreakerFactory.create("paymentservice");
+        try {
+            return circuitBreaker.run(() -> genericRestClient.makeRestCall(null, host, firstEndpoint, HttpMethod.GET, headers, PaymentDto.class),
+                    throwable -> genericRestClient.fallBackMethod(headers, host, firstEndpoint, throwable));
+        }
+        catch (RuntimeException ex){
+            return new PaymentDto("circuit-breaker executed","default","default");
+        }
+    }
+
+
+     */
 }
