@@ -30,11 +30,11 @@ public class StudentControllerTest {
     public void addStudent() throws Exception
     {
 
-        Mockito.when(studentService.addStudent(Mockito.any())).thenReturn(new Student(null, "Suresh", "phone", "abc"));
+        Mockito.when(studentService.addStudent(Mockito.any())).thenReturn(new Student(null, "Suresh", "email@gmail.com","phone", "abc"));
 
         mvc.perform( MockMvcRequestBuilders
                         .post("/add")
-                        .content(asJsonString(new Student(null, "name", "phone", "abc")))
+                        .content(asJsonString(new Student(null, "name", "email@gmail.com","phone", "abc")))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is2xxSuccessful())
